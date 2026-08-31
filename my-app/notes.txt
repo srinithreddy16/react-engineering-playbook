@@ -1,3 +1,4 @@
+PURPOSE OF DIFFERENT FILES
 eslint.config.js: 
 tsconfig.json: 
 vite.config.ts:
@@ -6,3 +7,6 @@ package-lock.json:
 node_modules: 
 public: 
 src: is the folder where we maintain the source code
+index.html:
+main.tsx:
+App.tsx:
