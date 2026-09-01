@@ -10,3 +10,147 @@ src: is the folder where we maintain the source code
 index.html:
 main.tsx:
 App.tsx:
+
+DOM: The tree like representation of all html elements inside browser is called DOM. All those elements are store in document object that is why we do something like => document.querySelector('.myBody').style.color='red  (here what we did is dom manipulation)
+
+What is Virtual DOM?
+====================
+-The Virtual DOM is a lightweight JavaScript representation of the real DOM.
+-It is a tree of JavaScript objects representing UI elements, their attributes, and content.
+-Whenever state or props change, React creates a new Virtual DOM tree.
+-React compares the new Virtual DOM with the previous Virtual DOM using a process called Diffing.
+-After identifying the changes, React updates only the required parts of the real DOM.
+-This process is called Reconciliation.
+-React never reads from real DOM, only writes to it.
+-The Virtual DOM helps React optimize rendering performance.
+
+ 
+How Does React Work? (Virtual DOM)
+==================================
+1. Initial Render : When the application loads, React creates a Virtual DOM tree based on the Real DOM.
+
+2. State or Props Change : Whenever state or props change (such as user input or API response), React creates a new Virtual DOM tree with the updated data.
+
+3. Diffing : React compares the new Virtual DOM with the previous Virtual DOM tree to identify what has changed.
+
+4. Reconciliation : Based on the diffing result, React determines the minimum changes required in the real DOM.
+
+5. Real DOM Update : React updates only the changed parts of the real DOM instead of re-rendering the entire page, resulting in faster UI updates.
+
+React Reconciliation 
+====================
+-Reconciliation is the process through which React updates the DOM.
+ (syncing the Virtual DOM to the actual DOM)
+-Reconciliation is the mechanism that tracks changes in a component state and renders the updated state to the screen.
+-It's a step that happens between the render() function being called and the displaying of elements on the screen. This entire process is called reconciliation.
+
+Fiber Reconciler
+================
+-Fiber is the new reconciliation engine or re-implementation of core algorithm in React v16.
+
+Module Systems : A module system is a way of organizing code into separate, self-contained files (modules), where each file can export the code it wants to share, and other files can import exactly what they need from it. It could be variable or functions.
+==============
+1. CommonJS (used in node.js)
+   module.exports = {member1,member2};
+   const member1 = require('Library/file name');
+   
+2. ECMASCRIPT (used in react)
+   export member1;
+   export default member2;
+   import DefaultMember , {Namedmember} from 'file'
+
+imports & exports
+=================
+-Default import:
+  import DefaultMember from 'src/my_lib';
+-Named imports:
+  import { name1, name2 } from 'src/my_lib';
+-Combining a default import with named imports
+  import DefaultMember, { name1, name2 } from 'src/my_lib';
+  import React, { Component } from 'react';
+
+Named Export vs Default Export
+==============================
+-Only one default export is allowed per file,where as multiple named exports are allowed per file.
+-For default export you can import with any name. The name need not to be matched with the default name because there will be only one default export in a file.
+
+
+React Emmet (react snippets - plugin)
+===========
+https://marketplace.visualstudio.com/items?itemName=rodrigovallades.es7-react-js-snippets
+
+IMR - import React from 'react';
+IMRD - import ReactDOM from 'react-dom'
+IMRC - import React, { Component } from 'react'
+IMPT -	import PropTypes from 'prop-types'
+RCC - React class component
+RCE - React class Export component
+RFC - React Functional Component
+RFCE - React Functional Export Component
+RMC - React Function Memo component
+RCONST - constructor with super
+RPC - React Class Pure Component
+RPCE - React Class Pure Export Component
+RAFC - React Arrow Function Component
+RAFCE - React Arrow Function export Component
+REN - render() { return( ) }
+SST - this.setState({ })
+
+
+
+React.StrictMode
+================
+-StrictMode is a React development tool used for identifying potential problems in an application.
+-It enables additional checks and warnings for its descendant components.
+-StrictMode checks run only in development mode and do not affect the production build.
+-StrictMode helps with the following:
+    • Identifying unsafe lifecycle methods
+    • Warning about legacy string ref API usage
+    • Warning about deprecated findDOMNode() usage
+    • Detecting unexpected side effects
+    • Detecting legacy context API usage
+    • Detecting components with non-reusable state
+	
+-ex: import { StrictMode } from 'react'
+     <StrictMode>
+		<App />         Writing Strictmode here will be applied to the entire
+                                application components. Because we write everything in App.tsx component
+     </StrictMode>
+
+Component
+=========
+-Components are the most basic UI building block of a React application.
+-Each Component is responsible for outputting a small,reusable piece of HTML.  
+-A Component Represents a part of the User Interface.
+-Components are Re-Usable and can be nested inside other component.
+-A React application contains a tree of components.
+-React components split the UI into independent, reusable pieces, and think about each piece in isolation. 
+
+
+2 types Of Component
+====================
+1. Functional Component ( stateless/presentational/dumb)
+2. Class Component ( statefull )
+Fragments
+=========
+-While returning elements in JSX, we can only return 1 element at a time.
+ That element can have children but we have to ensure that we are only returning 1 element at a time, or else we will get a syntax error. (ex: a function can return 1 value)
+-Fragments are way to render multiple elements without using a wrapper element.
+-Fragment acts as a wrapper without adding unnecessary divs to the DOM. 
+-We can use it directly from the React import, or deconstruct it.
+	  import React from 'react';
+	  <React.Fragment>
+        <div>I am an element!</div>
+        <button>I am another element</button>
+      </React.Fragment>
+-// Deconstructed
+	import { Fragment } from 'react';
+	<Fragment>
+        <div>I am an element!</div>
+        <button>I am another element</button>
+     </Fragment>
+-React version 16.2 simplified this process further, allowing for empty JSX tags to be interpreted as Fragments
+   <>
+		<div>I am an element!</div>
+		<button>I am another element</button>
+   </>
