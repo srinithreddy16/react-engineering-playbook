@@ -131,6 +131,23 @@ Component
 ====================
 1. Functional Component ( stateless/presentational/dumb)
 2. Class Component ( statefull )
+
+
+	Functional Component 			Class Component
+	---------------------			---------------
+1. No 'this' keyword				1. More feature rich
+2. solution without state			2. Maintain own private data- state
+3. Mainly for UI 					3. Complex UI Logic
+4. Stateless/dumb/Presentational    4. Provide Life cycle hooks
+
+
+When to use a Class Component over a Function Component?
+========================================================
+-If the component needs state or lifecycle methods then use class component otherwise use function component. 
+-However, from React 16.8 with the addition of Hooks, we can use state , lifecycle methods and other features that were only available in class component in function component also. 
+-So, it is always recommended to use Function components, unless you need a React functionality whose Function component equivalent is not present yet, like Error Boundaries.
+
+
 Fragments
 =========
 -While returning elements in JSX, we can only return 1 element at a time.
@@ -154,3 +171,47 @@ Fragments
 		<div>I am an element!</div>
 		<button>I am another element</button>
    </>
+
+Data Binding
+===============
+-Binding/Displaying the variable value in UI is called data binding.
+-React primarily uses one-way data binding.
+-Two-way binding can be implemented manually using state, value, and onChange handlers.
+
+Binding Type   | Description                     | React Example
+---------------|---------------------------------|----------------
+One-way Binding| State → UI                      | {value}
+Two-way Binding| State ↔ UI using `onChange`     | {value + onChange}
+
+ex:
+function App() {
+  const [name, setName] = useState("");
+  return (
+    <input value={name} onChange={(e) => setName(e.target.value)} />
+  );
+}
+
+
+STATE VARIABLE:
+A state variable is a piece of data that a component "remembers" between renders — and when it changes, React automatically re-renders the component to reflect that change on screen.
+Short definition
+A state variable holds data that can change over time (like user input, a counter, or a toggle), and updating it causes the UI to automatically update to match.
+Why not just use a normal variable?
+tsx
+function Counter() {
+  let count = 0;
+
+  const increment = () => {
+    count = count + 1;
+    console.log(count); // this DOES increase
+  };
+
+  return (
+    <div>
+      <p>{count}</p>
+      <button onClick={increment}>+1</button>
+    </div>
+  );
+}
+
+This looks like it should work — but it won't update the screen. The value of count does change internally, but React has no idea it needs to re-render. A normal variable is just memory that gets wiped and reset every time the component re-renders anyway.
