@@ -215,3 +215,18 @@ function Counter() {
 }
 
 This looks like it should work — but it won't update the screen. The value of count does change internally, but React has no idea it needs to re-render. A normal variable is just memory that gets wiped and reset every time the component re-renders anyway.
+
+Conditional Rendering
+=====================
+-Conditional rendering means displaying different UI elements or components based on a condition.
+-It is commonly used to show, hide, or switch UI content dynamically.
+-React uses JavaScript conditions to control what gets rendered on the screen.
+
+Use Cases
+=========
+-login vs logout button
+-loading vs actual Data(loaded)
+-error vs success
+-admin vs normal user
+-dark mode vs light mode
+-empty cart vs items in cart
