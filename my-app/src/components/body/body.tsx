@@ -1,6 +1,7 @@
 import add , {sub, mul} from "../../utils/math.utils"
 import React from "react";
 import DataBinding from "../databinding/DataBinding.tsx";
+import DataBindingAssignments from "../databinding_examples/DataBindingExamples.tsx";
 
 function Body(){
   console.log(add(10,20));
@@ -13,6 +14,7 @@ function Body(){
     <div>This is Body Component</div>
     <div>My react version is:: {React.version}</div>
     <DataBinding/>
+    <DataBindingAssignments/>
   </div>
 }
 export default Body;

@@ -191,6 +191,11 @@ function App() {
   );
 }
 
+Limitations of Local Variables
+==============================
+No re-rendering : Changing a Local variable doesn't re-render, the component won't update to reflect the new value.
+No Persistence : Local variable are re-created on each render, any changes made to them are lost after re-render
+
 
 STATE VARIABLE:
 A state variable is a piece of data that a component "remembers" between renders — and when it changes, React automatically re-renders the component to reflect that change on screen.
@@ -216,6 +221,23 @@ function Counter() {
 
 This looks like it should work — but it won't update the screen. The value of count does change internally, but React has no idea it needs to re-render. A normal variable is just memory that gets wiped and reset every time the component re-renders anyway.
 
+
+
+Why State variables
+===================
+Re-rendering : when state variable changes, React re-renders the component with new value
+Persistence : states are persisted accross re-renders
+
+State in Functional Component
+=============================
+-State in functional Component can be maintained using useState() hook.
+-useState() is used to declare a state variable in functional component.
+-The only argument to the useState() Hook is the initial state.
+-It returns a pair of values: 
+  a. State value (State Variable)
+  b. function to update that state value. 
+  ex: const [count, setCount] = useState(0);
+  
 Conditional Rendering
 =====================
 -Conditional rendering means displaying different UI elements or components based on a condition.
