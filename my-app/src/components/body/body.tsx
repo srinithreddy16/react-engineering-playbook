@@ -2,6 +2,9 @@ import add , {sub, mul} from "../../utils/math.utils"
 import React from "react";
 import DataBinding from "../databinding/DataBinding.tsx";
 import DataBindingAssignments from "../databinding_examples/DataBindingExamples.tsx";
+import ListDemo1 from "../listItem/ListDemo1.tsx";
+import UserList from "../userlist/UserList.tsx";
+import ProductList from "../productList/ProductList.tsx";
 
 function Body(){
   console.log(add(10,20));
@@ -15,6 +18,9 @@ function Body(){
     <div>My react version is:: {React.version}</div>
     <DataBinding/>
     <DataBindingAssignments/>
+    <ListDemo1/>
+    <UserList/>
+    <ProductList/>
   </div>
 }
 export default Body;
