@@ -1,4 +1,3 @@
-import React from 'react'
 
 function ListDemo1() {
     const carsArr = ['Tata', 'BMW', 'Honda', 'hyundai', 'Toyota']
