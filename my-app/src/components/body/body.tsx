@@ -7,6 +7,7 @@ import UserList from "../userlist/UserList.tsx";
 import ProductList from "../productList/ProductList.tsx";
 import EmployeeList from "../listItem/EmployeeList.tsx";
 import TaskList from "../listItem/TaskList.tsx";
+import PropsDemo1 from "../props/PropsDemo1.tsx";
 
 function Body(){
   console.log(add(10,20));
@@ -25,6 +26,8 @@ function Body(){
     <ProductList/>
     <EmployeeList/>
     <TaskList/>
+    <PropsDemo1 name="Srinith" msg="How are you" />
+    <PropsDemo1 name="Reddy"  />
   </div>
 }
 export default Body;
