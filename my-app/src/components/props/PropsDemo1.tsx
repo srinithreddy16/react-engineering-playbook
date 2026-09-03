@@ -2,8 +2,8 @@ interface Greeting{
   name:string; // mandatory props
   msg?:string; //optional props
 }
-export default function PropsDemo1(props:Greeting){
-  return <h3>Hello, {props.name} -- {props.msg}</h3>;
+export default function PropsDemo1({name, msg = 'good morning'}:Greeting){
+  return <h3>Hello, {name} -- {msg}</h3>;
 }
 
 
