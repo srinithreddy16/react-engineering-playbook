@@ -1,4 +1,3 @@
-
 function ListDemo1() {
     const carsArr = ['Tata', 'BMW', 'Honda', 'hyundai', 'Toyota']
     return <>

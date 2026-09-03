@@ -5,6 +5,8 @@ import DataBindingAssignments from "../databinding_examples/DataBindingExamples.
 import ListDemo1 from "../listItem/ListDemo1.tsx";
 import UserList from "../userlist/UserList.tsx";
 import ProductList from "../productList/ProductList.tsx";
+import EmployeeList from "../listItem/EmployeeList.tsx";
+import TaskList from "../listItem/TaskList.tsx";
 
 function Body(){
   console.log(add(10,20));
@@ -21,6 +23,8 @@ function Body(){
     <ListDemo1/>
     <UserList/>
     <ProductList/>
+    <EmployeeList/>
+    <TaskList/>
   </div>
 }
 export default Body;
