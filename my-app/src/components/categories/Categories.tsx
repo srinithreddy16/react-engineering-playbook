@@ -1,31 +1,25 @@
+import CategoryItem from './CategoryItem'
+
 function Categories() {
+  const categoryArr = [
+  { label: "Grocery", img_url: "https://rukminim1.flixcart.com/fk-p-flap/196/196/image/8b4adaace948fe23.jpg?q=60" },
+  { label: "Mobile", img_url: "https://rukminim1.flixcart.com/fk-p-flap/196/196/image/a6189afdd765a687.jpg?q=60" },
+  { label: "Appliances", img_url: "https://rukminim1.flixcart.com/fk-p-flap/196/196/image/51b0d5f9aabc2462.jpg?q=60" },
+  { label: "Beauty", img_url: "https://rukminim1.flixcart.com/fk-p-flap/196/196/image/d31d524f681630af.jpg?q=60" },
+  { label: "Furniture", img_url: "https://rukminim1.flixcart.com/fk-p-flap/196/196/image/9be859f78d39cc22.jpg?q=60" },
+  { label: "Fashion", img_url: "https://rukminim1.flixcart.com/fk-p-flap/196/196/image/5dca7713b355df43.jpg?q=60" },
+  { label: "Travel", img_url: "https://rukminim1.flixcart.com/fk-p-flap/196/196/image/d7eae409dc461a54.jpg?q=60" },
+  { label: "Electronics", img_url: "https://rukminim1.flixcart.com/fk-p-flap/196/196/image/a080ac3397f3612d.png?q=60" },
+  { label: "Supercoin", img_url: "https://rukminim1.flixcart.com/fk-p-flap/196/196/image/e476bbcf4677c695.jpg?q=60" }
+ ];
   return (
     <div className="container">
       <div className="row">
-        <div className="col text-center">
-          <img src="https://static-assets-web.flixcart.com/apex-static/images/svgs/L1Nav/fashion.svg" alt="Fashion" />
-          <div>Fashion</div>
-        </div>
-        <div className="col text-center">
-          <img src="https://static-assets-web.flixcart.com/apex-static/images/svgs/L1Nav/mobiles.svg" alt="Mobile" />
-          <div>Mobile</div>
-        </div>
-        <div className="col text-center">
-          <img src="https://static-assets-web.flixcart.com/apex-static/images/svgs/L1Nav/electronics.svg" alt="Electronics" />
-          <div>Electronics</div>
-        </div>
-        <div className="col text-center">
-          <img src="https://static-assets-web.flixcart.com/apex-static/images/svgs/L1Nav/beauty.svg" alt="Beauty" />
-          <div>Beauty</div>
-        </div>
-        <div className="col text-center">
-          <img src="https://static-assets-web.flixcart.com/apex-static/images/svgs/L1Nav/sport.svg" alt="Sports" />
-          <div>Sports</div>
-        </div>
-        <div className="col text-center">
-          <img src="https://static-assets-web.flixcart.com/apex-static/images/svgs/L1Nav/furniture.svg" alt="Home" />
-          <div>Home</div>
-        </div>
+        {categoryArr.map((categoryObj)=>{
+          return <div className='col'>
+            <CategoryItem categoryObj={categoryObj} />
+          </div>
+        })}
       </div>
     </div>
   );

@@ -237,7 +237,7 @@ State in Functional Component
   a. State value (State Variable)
   b. function to update that state value. 
   ex: const [count, setCount] = useState(0);
-  
+
 Conditional Rendering
 =====================
 -Conditional rendering means displaying different UI elements or components based on a condition.
@@ -252,3 +252,35 @@ Use Cases
 -admin vs normal user
 -dark mode vs light mode
 -empty cart vs items in cart
+
+Props
+=====
+-Props stands for Properties. Props are inputs to components.
+-Props are used to pass data and methods from a parent component to a child component.
+-Attributes passed to components are received as an object called props.
+-Props help make components reusable and dynamic.
+-Data passed using props flows in one direction (Parent → Child). This is called unidirectional data flow.
+-We can pass props to components similar to HTML attributes.
+
+Example:
+---------
+<ChildComponent name="John" age={25} />
+-Boolean props passed without a value are treated as true.
+	<MyComponent showTitle={true} />
+	<MyComponent showTitle />
+
+-Props can be accessed as shown below:
+	Class Component: this.props.propName
+	Functional Component: props.propName
+
+
+Important Points about props
+=============================
+1. Props are immutable.
+   -Child components should not modify props received from parent components.
+2. Props support unidirectional data flow.
+   -Data flows only from Parent → Child.
+3. Props help create reusable components.
+4. When parent data changes, updated props are automatically passed to child components.
+
+
