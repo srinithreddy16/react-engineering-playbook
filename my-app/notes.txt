@@ -282,5 +282,5 @@ Important Points about props
    -Data flows only from Parent → Child.
 3. Props help create reusable components.
 4. When parent data changes, updated props are automatically passed to child components.
-
+Refer to Categories.tsx and CategoryItem.tsx
 

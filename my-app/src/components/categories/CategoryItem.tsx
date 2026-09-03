@@ -1,8 +1,8 @@
 import './categoryItem.css';
 
-export default function CategoryItem(props: any) {
+export default function CategoryItem({ categoryObj }: any) {  //props destructuring
   return <>
-    <img src={props.categoryObj.img_url} alt="" />
-    <div>{props.categoryObj.label}</div>
+    <img src={categoryObj.img_url} alt="" />
+    <div>{categoryObj.label}</div>
   </>
 }
