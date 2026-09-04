@@ -284,3 +284,32 @@ Important Points about props
 4. When parent data changes, updated props are automatically passed to child components.
 Refer to Categories.tsx and CategoryItem.tsx
 
+
+Component vs PureComponent
+==========================
+-PureComponent is exactly the same as Component except that it handles the 
+ 'shouldComponentUpdate' method for us. 
+-When props or state changes, PureComponent will do a shallow comparison on both props and state.if there is a change in state/props, then only render() will be called. 
+-A normal Component always calls render() when we update the state. even though there is no change in the last state data and current state data.
+-Class components that extend the React.PureComponent class are treated as pure components.
+	Ex: class myComp extends React.PureComponent {
+		}
+		
+-Every Functional Component is a Pure-Component.
+-PureComponent checks previous State and new State , if nothing changed , it skips re-rendering
+   const [name, setName] = useState("pavan");
+   const updateName = () => {setName("pavan")};
+
+
+React.memo()
+============
+-Introduced in React v16.6.
+-React.memo() is a Higher-Order Component (HOC).
+-It is used to improve performance by preventing unnecessary re-renders.
+-It is used with child components that receive props.
+-When a component is wrapped with React.memo(), React re-renders it only when its props change.
+-React.memo() performs a shallow comparison of props. If the props are unchanged, React reuses the previous rendered result.
+-Avoids unnecessary re-rendering when parent components re-render.
+  
+
+

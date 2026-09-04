@@ -11,6 +11,7 @@ import PropsDemo1 from "../props/PropsDemo1.tsx";
 import ProductList2 from "../productList/ProductList2.tsx";
 import Demo1 from "../demo/Demo1.tsx";
 import Demo2 from "../demo/Demo2.tsx";
+import Counter from "../state/Counter.tsx";
 
 function Body(){
   console.log(add(10,20));
@@ -34,6 +35,8 @@ function Body(){
     <PropsDemo1 name="Reddy"  />
     <Demo1/>
     <Demo2/>
+    <Counter/>
+    
    
   </div>
 }
