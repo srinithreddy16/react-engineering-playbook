@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import productArr from './product_data';
+import './ProductList.css';
 
 export default function ProductList2() {
   const [products, setProducts] = useState(productArr);
@@ -40,7 +41,7 @@ export default function ProductList2() {
 
   return <>
     <h3 className="text-center">Product List</h3>
-    <div className="container">
+    <div className="container product-list-2">
       <div className="row">
         <div className="col-sm-2">
           <select onChange={filterProductsBasedOncategory}>
@@ -64,7 +65,7 @@ export default function ProductList2() {
         {products.map(product => {
           return <div className='col-sm-3' key={product.id}>
             <div className="card h-100">
-              <img src={product.image} className="card-img-top" alt="" height="200" />
+              <img src={product.image} className="card-img-top" alt="" />
               <div className="card-body">
                 <p className="text-truncate">{product.category}</p>
                 <p className="text-truncate">{product.title}</p>

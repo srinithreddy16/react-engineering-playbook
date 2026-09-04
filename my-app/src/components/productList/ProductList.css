@@ -1,0 +1,5 @@
+.product-list-2 .card-img-top,
+.product-list .card-img-top {
+  height: 160px;
+  object-fit: contain;
+}

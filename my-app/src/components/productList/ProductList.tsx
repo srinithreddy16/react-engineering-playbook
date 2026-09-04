@@ -3,6 +3,8 @@ import productArr from "./product_data.ts";
 import Swal from "sweetalert2";
 import Modal from 'react-modal';
 import Select from "react-select";
+import './ProductList.css';
+
 
 
 export default function ProductList() {
@@ -62,12 +64,12 @@ export default function ProductList() {
       </div>
       
 
-      <div className="container">
+      <div className="container product-list">
        <div className="row">
         {filteredProducts.map(product => (
           <div className="col-sm-3 mb-4" key={product.id}>
             <div className="card h-100">
-              <img src={product.image} className="card-img-top" alt="" height="200"/>
+              <img src={product.image} className="card-img-top" alt=""/>
               <div className="card-body">
                 <p className="text-truncate">{product.category}</p>
                 <p className="text-truncate">{product.title}</p>
