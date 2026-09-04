@@ -1,4 +1,5 @@
-export default function UserCard(props: any) {
+import React from "react";
+function UserCard(props: any) {
     console.log('User Card Re-rendered...')
   const { name, age, address } = props;
   return( 
@@ -11,3 +12,5 @@ export default function UserCard(props: any) {
   </>
   );
 }
+
+export default React.memo(UserCard);

@@ -311,5 +311,31 @@ React.memo()
 -React.memo() performs a shallow comparison of props. If the props are unchanged, React reuses the previous rendered result.
 -Avoids unnecessary re-rendering when parent components re-render.
   
+React.memo — My Notes
+
+What I observed:
+When my parent component (Counter) changes any state (like count), all its child components re-render again and again — even if that changed data is not being sent to them as props.
+
+Specific case:
+
+count is not a prop for UserCard.
+But when I do Increment / Decrement / Reset on count, UserCard still re-renders every single time.
+
+The question I asked myself:
+
+When count is not even a prop for UserCard, why should UserCard re-render just because count is changing in my parent?
+
+Answer — this is default React behavior:
+By default, whenever a parent re-renders, React re-renders all its children too — regardless of whether that specific child's props actually changed.
+
+That's why we use memo:
+React.memo wraps a component and tells React: "Only re-render me if my own props change. If my props are the same as last time, skip re-rendering me."
+
+Result:
+So now, if UserCard's props (name, age, address) stay the same, UserCard will not re-render — even if count keeps changing in the parent.
+
+One-line takeaway:
+
+memo = "don't re-render me just because my parent re-rendered — only re-render me if MY props actually change."
 
 
