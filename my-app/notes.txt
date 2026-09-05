@@ -338,4 +338,88 @@ One-line takeaway:
 
 memo = "don't re-render me just because my parent re-rendered — only re-render me if MY props actually change."
 
+Refs (Template Reference Variable)
+==================================
+-Refs are mainly used when we need to work with the DOM directly instead of using React state.
+-Refs provide a way to access DOM nodes or React elements.
+-Managing focus, text selection , animations.
+-ex: this.myRef1 = React.createRef();  (class component)
+     const myRef1 = useRef();          (function component)
+	 const myRef1 = useRef<HTMLInputElement>(null);
+     
+
+-React supports another way to set refs called “callback refs”, 
+ which gives more fine-grain control over normal refs when refs are set and unset.
+ ex: <input ref={x => inputRef1=x} />
+     alert(inputRef1.value)
+	 
+-'Ref forwarding' is a feature that lets some components take a ref they receive,and pass/forward it further down to a child.
+
+useRef gives you a direct handle to a real DOM element, like the input box on the page. You do not store the typed text in state. You read it only when you need it (when Add is clicked).
+
+Why useRef here?
+With useState, every keystroke would update state and re-render the component.
+
+With useRef:
+
+typing does not re-render
+React is not tracking the input value
+on click, you read the input’s current value from the DOM
+So useRef is useful when you only need the value at one moment (the button click), not on every change.
+
+Think of it as: “Give me a pointer to this input, so I can read .value later.”
+
+The refs
+const inputRef1 = useRef<HTMLInputElement>(null)
+const inputRef2 = useRef<HTMLInputElement>(null)
+Each ref is a box. After render, inputRef1.current is the first <input> DOM node.
+
+null is the start value, because the input does not exist yet. After React draws the page, .current points to the input.
+
+HTMLInputElement is only TypeScript: this ref is for an input.
+
+Connecting ref to the input
+<input ref={inputRef1} />
+<input ref={inputRef2} />
+ref={inputRef1} means: “this input is inputRef1.current.”
+
+The Add function
+const val1 = +(inputRef1.current?.value || 0);
+const val2 = +(inputRef2.current?.value || 0);
+Part	Meaning
+inputRef1.current
+the first input element
+.value
+the text inside it ("10" is a string)
+?.
+if .current is null, don’t crash
+|| 0
+if empty/null, use 0
++
+convert string to number ("10" → 10)
+Then:
+
+console.log(`Addition of ${val1} and ${val2} is ${val1 + val2}`);
+If you type 10 and 20 and click Add, the console shows:
+
+Addition of 10 and 20 is 30
+Flow
+1. Page loads. Refs are created (current = null).
+2. React renders the two inputs and attaches the refs.
+3. You type 10 and 20. No re-render.
+4. You click Add.
+5. addition() reads both .value from the DOM.
+6. Converts to numbers and logs the sum.
+useRef vs useState (this example)
+useState	useRef
+Stores the number?
+Yes, in state
+No, reads from the input when needed
+Re-renders on type?
+Yes
+No
+Good for this demo?
+Also fine
+Better if you only need the value on click
+useRef = “don’t watch every keystroke; just look at the input when I click Add.”
 
