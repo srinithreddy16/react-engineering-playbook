@@ -434,3 +434,51 @@ Forms
     <button>submit</button>
   </form>
 -use event.preventDefault() to prevent the form from actually being submitted.(to avoid page refresh)
+
+-A form can be validated on change or while submitting the form.
+-The textarea element in React is slightly different from HTML Syntax.
+-In HTML the value of a textarea was the text between the start tag <textarea> and the end tag </textarea>,
+ in React the value of a textarea is placed in a value attribute:
+   <textarea value={this.state.description} />   correct
+   <textarea>{this.state.description}<textarea>  wrong
+-A drop down list, or a select box, in React is also a bit different from HTML.
+-in HTML, the selected value in the drop down list was defined with the selected attribute:
+	 <select value={this.state.mycar}>
+        <option value="Ford">Ford</option>
+        <option value="Volvo">Volvo</option>
+        <option value="Fiat">Fiat</option>
+      </select>   //correct
+	  
+	<select>
+	  <option value="Ford">Ford</option>
+	  <option value="Volvo" selected>Volvo</option>
+	  <option value="Fiat">Fiat</option>
+	</select> //wrong
+
+Feature									Uncontrolled		Controlled	
+-----------------------------------------------------------------------
+One-time value retrieval 
+(e.g. on submit)							yes					yes
+Validating on submit						yes					yes
+Default Value								yes                 yes
+Field-level Validation						no					yes
+Conditionally disabling submit button		no					yes
+Enforcing input format						no					yes
+dynamic inputs								no					yes
+
+
+-Uncontrolled inputs are like traditional HTML form inputs.
+-Form data is handled by the DOM itself.
+-They remember what we typed. we can then get their value using a ref.
+-To write an uncontrolled component, instead of writing an event handler for every state update, you can use a ref to get form values from the DOM.
+-you have to ‘pull’ the value from the field when you need it.(ex:-form submit)
+-there is no updating of any state when you change the input-box value.
+-Let React to specify the initial value, but leave subsequent updates uncontrolled.
+-To handle this case, you can specify a 'defaultValue' attribute instead of value.
+
+
+-Controlled form components are defined with a value property. 
+-value of controlled input is managed by React, 
+-With a controlled component, the input’s value is always driven by the React state.
+-component state and the input value is in sync at all the times.
+ <input onChange={this.onChange} value={this.state.name} />

@@ -15,6 +15,7 @@ import Counter from "../state/Counter.tsx";
 import AdditionDemo1 from "../form/AdditionDemo1.tsx";
 import AdditionDemo2 from "../form/AdditionDemo2.tsx";
 import FormDemo1 from "../form/FormDemo1.tsx";
+import FormDemo2 from "../form/FormDemo2.tsx";
 
 function Body(){
   console.log(add(10,20));
@@ -42,6 +43,7 @@ function Body(){
     <AdditionDemo1/>
     <AdditionDemo2/>
     <FormDemo1/>
+    <FormDemo2/>
     
    
   </div>

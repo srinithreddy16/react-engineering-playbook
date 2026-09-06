@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
+    "formik": "^2.4.9",
     "prop-types": "^15.8.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
@@ -18,7 +19,8 @@
     "react-js-search": "^0.4.0",
     "react-modal": "^3.16.3",
     "react-select": "^5.10.2",
-    "sweetalert2": "^11.26.25"
+    "sweetalert2": "^11.26.25",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
