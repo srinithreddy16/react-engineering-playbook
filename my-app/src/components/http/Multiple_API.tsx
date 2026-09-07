@@ -9,6 +9,7 @@ export default function Multiple_API() {
     const promise2 = axios.get("https://api.github.com/users/gaearon");
     const promise3 = axios.get("https://api.github.com/users/sindresorhus");
     const responseArr = await axios.all([promise1, promise2, promise3]);
+    console.log(responseArr) // this is written to check the TimeInterceptor
     const responseData = responseArr.map(response=>response.data);
     console.log(responseData)
     setData(responseData);
@@ -18,7 +19,7 @@ export default function Multiple_API() {
     <>
 
       <h3 className="text-center">Fetch Data From Multiple APIs and display on the screen</h3>
-      
+
       <button onClick={fetchData}>Fetch Data</button>
 
       <table className="table table-bordered">
