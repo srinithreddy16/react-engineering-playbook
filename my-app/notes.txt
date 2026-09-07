@@ -557,3 +557,51 @@ Create an Axios Instance
 2. Once the default instance is set up, it can then be used anywhere
    import client from 'api.js'
    client.get('/users')
+
+
+Making multiple requests with axios.all() 
+========================================
+-Executes multiple requests in parallel, not sequentially.
+-Similar to Javascript's Promise.all()
+-Total execution time depends on the slowest request.
+-If one request fails, Promise.all()/axios.all() fails immediately.
+
+ex:
+	const promise1 = axios.get("https://api.github.com/users/defunkt");
+    const promise2 = axios.get("https://api.github.com/users/evanphx");
+    const promise3 = axios.get("https://api.github.com/users/sanjaysamantra1");
+    const responseArr = await axios.all([promise1, promise2, promise3]);
+    let responseData = responseArr.map((response) => response.data);
+    console.log(responseData);
+
+  
+Http Interceptors
+=================
+-Interceptors allow us to intercept/modify HTTP requests or responses before they are sent to the server or before they are processed by then() / catch().
+ 
+ Client Sends httpRequest ----> Interceptor ----> ModifiedRequest ----> Backend Server
+ Client receives ModifiedResponse<---- Interceptor <---- httpResponse <---- Backend Server
+ 
+ 
+Why Interceptors:
+-Centralized request/response handling.
+-Attach authentication tokens automatically.
+-Handle errors globally.
+-Refresh expired tokens.
+-Avoid duplicate code across API calls.
+ 
+ 
+ 
+
+Request interceptor use cases:
+-Validate the presence of authentication tokens before sending requests.
+-Redirect users to login if authentication information is missing.
+
+export function myInterceptor() {
+  axios.interceptors.request.use((req) => {
+    req.headers.authorization = "my secret token";
+    return req;
+  });
+}
+-call the above function in app.js
+
