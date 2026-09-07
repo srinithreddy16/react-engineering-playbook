@@ -19,6 +19,7 @@ import FormDemo2 from "../form/FormDemo2.tsx";
 import Folder from "../folder_explorer/Folder";
 import folderData from '../folder_explorer/data.json'
 import UserList_Http from "../http/UserList_Http.tsx";
+import CommentList_Http from "../http/CommentList_Http.tsx";
 
 function Body(){
   console.log(add(10,20));
@@ -49,6 +50,7 @@ function Body(){
     <FormDemo2/>
     <Folder folderInfo={folderData}/>
     <UserList_Http/>
+    <CommentList_Http/>
     
     
    
