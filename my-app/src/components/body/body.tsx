@@ -23,6 +23,7 @@ import CommentList_Http from "../http/CommentList_Http.tsx";
 import ToDoList_Http from "../http/ToDoList_Http.tsx";
 import Multiple_API from "../http/Multiple_API.tsx";
 import UseEffectDemo1 from "../hooks/UseEffectDemo1.tsx";
+import UserDetails from "../hooks/UserDetails.tsx";
 
 function Body(){
   console.log(add(10,20));
@@ -57,6 +58,7 @@ function Body(){
     <ToDoList_Http/>
     <Multiple_API/>
     <UseEffectDemo1/>
+    <UserDetails/>
     
     
    
