@@ -482,3 +482,11 @@ dynamic inputs								no					yes
 -With a controlled component, the input’s value is always driven by the React state.
 -component state and the input value is in sync at all the times.
  <input onChange={this.onChange} value={this.state.name} />
+
+Ways of Fetching Data
+=====================
+There are many ways to extract data from API in React:
+1. using fetch() , then()
+2. using async-await syntax
+3. using Axios library
+4. using custom hooks
