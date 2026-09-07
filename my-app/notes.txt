@@ -525,3 +525,35 @@ HTTP with axios
 		setUsers(response.data);
     };
   
+Fetch API 
+=========
+-Built into modern browsers and Node.js (no installation required).
+-Request body usually needs JSON.stringify().
+-Requires response.json() to parse JSON responses.
+-Supports request cancellation via AbortController, but no built-in timeout.
+-No native support for interceptors.
+
+DIFFERENCES
+
+Axios
+=====
+-Requires installation (npm install axios).
+-Automatically serializes request data and parses JSON responses.
+-Supports request cancellation and built-in timeout configuration.
+-Supports request and response interceptors.
+-Automatically rejects promises for HTTP errors (4xx/5xx), simplifying error handling                                                       
+
+
+
+Create an Axios Instance
+========================
+1. Create a separate file named api.js(can be anything) and add the below code
+	import axios from 'axios';
+	const client = axios.create({
+	  baseURL: `http://jsonplaceholder.typicode.com/`
+	});
+	export default client;
+	
+2. Once the default instance is set up, it can then be used anywhere
+   import client from 'api.js'
+   client.get('/users')
