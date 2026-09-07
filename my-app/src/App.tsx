@@ -5,10 +5,13 @@ import Body from './components/body/body'
 import Footer from './components/footer/footer'
 import { AuthInterceptor } from "./interceptors/AuthInterceptor";
 import { TimeInterceptor } from './interceptors/TimeInterceptor'
+import ErrorInterceptor from './interceptors/ErrorInterceptor'
+
 
 function App(){
   AuthInterceptor();
   TimeInterceptor();
+  ErrorInterceptor();
   return <div>
     <Navbar />
     <Categories />
