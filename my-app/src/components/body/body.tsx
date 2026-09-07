@@ -22,6 +22,7 @@ import UserList_Http from "../http/UserList_Http.tsx";
 import CommentList_Http from "../http/CommentList_Http.tsx";
 import { FcTodoList } from "react-icons/fc";
 import ToDoList_Http from "../http/ToDoList_Http.tsx";
+import Multiple_API from "../http/Multiple_API.tsx";
 
 function Body(){
   console.log(add(10,20));
@@ -54,6 +55,7 @@ function Body(){
     <UserList_Http/>
     <CommentList_Http/>
     <ToDoList_Http/>
+    <Multiple_API/>
     
     
    
