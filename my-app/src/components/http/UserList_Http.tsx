@@ -3,6 +3,7 @@ import { useState } from "react";
 export default function UserList_Http() {
   const [users, setUsers] = useState<any[]>([]);
 
+  /*
   const fetchUserData = () => {
     fetch("https://jsonplaceholder.typicode.com/users").then((response) => {
       response.json().then((finalResponse) => {
@@ -10,6 +11,13 @@ export default function UserList_Http() {
         setUsers([...finalResponse]);
       });
     });
+  };
+  */
+
+  const fetchUserData = async () => {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const finalResponse = await response.json();
+    setUsers([...finalResponse]);
   };
 
   return (
