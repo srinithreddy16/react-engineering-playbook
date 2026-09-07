@@ -605,3 +605,39 @@ export function myInterceptor() {
 }
 -call the above function in app.js
 
+LifeCycle Hooks
+===============
+-Every class component in React goes through a lifecycle of events.
+-The three phases are: 
+	1.Mounting - (constructor,getDerivedStateFromProps,render,componentDidMount)
+	2.Updating - (getDerivedStateFromProps,shouldComponentUpdate,render,getSnapshotBeforeUpdate, componentDidUpdate)
+	3.Unmounting - (componentWillUnmount)
+
+  LifeCycle hooks in Functional Component
+========================================
+-Functional Components don't have lifecycle methods like class components.
+-lifecycle behaviour is handled with hooks , primarily useEffect()
+
+useEffect()
+----------
+-useEffect() is a React hook that allows to execute some code after the component is initially rendered & when state change happens.
+-Common Functionalities : fetching data from API , Updating DOM , timers , event listeners
+-fetching user data when selected user Id changes
+
+-useEffect() takes a callback function as the 1st argument and a dependency array as the 2nd argument.
+  Example:
+  useEffect(() => {}, [])
+
+-If the 2nd argument is omitted, the effect runs after every render (state and prop changes).
+  useEffect(() => {})
+  
+-When the dependency array is empty ([]), the effect runs only once after the initial render 
+ the effect will not re-run when state value changes
+ useEffect(() => {}, [])
+
+-If dependencies are provided, the effect runs whenever any dependency value changes and for initial render the effect runs by default.
+ useEffect(() => {}, [a,b])
+  
+-We can have multiple useEffect() hooks in the same component to handle different side effects.
+
+
