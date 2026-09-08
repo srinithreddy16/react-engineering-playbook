@@ -640,4 +640,17 @@ useEffect()
   
 -We can have multiple useEffect() hooks in the same component to handle different side effects.
 
+useMemo()
+=========
+-The functions called inside a component are re-invoked on every state change.
+-If we want a function to run only on component load (or only when some values change), and not on every state change, use useMemo() for that calculation.
+-useMemo() is used to cache (memoize) the result of an expensive calculation.
+-It helps avoid unnecessary re-calculations during re-renders.
+-useMemo() returns a memoized value.
+-useMemo(() => {}, []) accepts a second parameter to declare dependencies.
+-The function passed to useMemo() executes only when one of its dependencies changes.
+-If the dependency array is empty ([]), the calculation runs only on the initial render.
+-useMemo() should be used for expensive calculations such as filtering, sorting, or complex computations.
+-The main difference between useMemo() and useCallback():
+-useMemo() returns a memoized value, whereas useCallback() returns a memoized function.
 
