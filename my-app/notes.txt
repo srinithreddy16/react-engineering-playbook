@@ -682,3 +682,37 @@ One-line takeaway:
 React.memo() works fine when props are plain data. But if a prop is a function, a new function is created on every parent render — so React.memo() gets tricked into thinking props changed, and re-renders anyway.
 
 Now our requirement is When a function is passed as a prop from parent to child, the child should not re-render for parent state changes if its other props stay the same. To achieve this, wrap that function in useCallback() in the parent. useCallback() keeps the same function reference across parent re-renders, so React.memo on the child can skip unnecessary re-renders.
+
+
+SyntheticEvent
+==============
+-Instead of working directly with the browser's native event system(MouseEvent, KeyboardEvent, PointerEvent, etc.), 
+ React provides its own event system called SyntheticEvent/SyntheticBaseEvent.
+-A SyntheticEvent is a cross-browser wrapper around the browser's native event.
+-It normalizes browser differences, ensuring that events behave consistently across different browsers(Chrome, Firefox, Safari)
+-In React, event handler functions receive a SyntheticEvent object as an argument instead of the browser's native Event object.
+-SyntheticEvent provides the same interface as native events, including properties and methods such as:
+    * target
+    * currentTarget
+    * preventDefault()
+    * stopPropagation()	
+-If access to the underlying native browser event is required, it can be obtained using: event.nativeEvent
+
+Example:
+---------
+function handleClick(event) {
+    console.log(event);             // SyntheticEvent
+    console.log(event.nativeEvent); // Native browser event
+}
+<button onClick={handleClick}>Click Me</button>
+
+Advantages:
+-----------
+1. Cross-browser compatibility.
+2. Consistent event behavior across all supported browsers.
+3. Improved performance through React's event delegation mechanism.
+4. Simplifies event handling for developers.
+
+HOC(Original)  →  Enhanced
+CounterComponent(ClickCounter)  →  ClickCounter with count/increment
+CounterComponent(HoverCounter)  →  HoverCounter with count/increment

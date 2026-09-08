@@ -25,6 +25,8 @@ import Multiple_API from "../http/Multiple_API.tsx";
 import UseEffectDemo1 from "../hooks/UseEffectDemo1.tsx";
 import UserDetails from "../hooks/UserDetails.tsx";
 import UseMemoTest from "../hooks/UseMemoTest.tsx";
+import ClickCounter from "../HOC/ClickCounter.tsx";
+import HoverCounter from "../HOC/HoverCounter.tsx";
 
 function Body(){
   console.log(add(10,20));
@@ -61,6 +63,8 @@ function Body(){
     <UseEffectDemo1/>
     <UserDetails/>
     <UseMemoTest/>
+    <ClickCounter/>
+    <HoverCounter/>
     
     
    
