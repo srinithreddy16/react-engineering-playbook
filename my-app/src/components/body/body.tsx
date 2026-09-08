@@ -27,6 +27,7 @@ import UserDetails from "../hooks/UserDetails.tsx";
 import UseMemoTest from "../hooks/UseMemoTest.tsx";
 import ClickCounter from "../HOC/ClickCounter.tsx";
 import HoverCounter from "../HOC/HoverCounter.tsx";
+import MyCounter from "../HOC/MyCounter.tsx";
 
 function Body(){
   console.log(add(10,20));
@@ -65,6 +66,7 @@ function Body(){
     <UseMemoTest/>
     <ClickCounter/>
     <HoverCounter/>
+    <MyCounter/>
     
     
    

@@ -23,7 +23,7 @@ export default defineConfig([
       'react-hooks/set-state-in-effect': 'off',
       'react-refresh/only-export-components': [
         'error',
-        { allowConstantExport: true, extraHOCs: ['CounterComponent'] },
+        { allowConstantExport: true, extraHOCs: ['CounterComponent', 'withLogger'] },
       ],
     },
   },
