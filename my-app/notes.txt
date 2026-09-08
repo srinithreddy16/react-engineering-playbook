@@ -654,3 +654,31 @@ useMemo()
 -The main difference between useMemo() and useCallback():
 -useMemo() returns a memoized value, whereas useCallback() returns a memoized function.
 
+
+useCallback()
+=============
+-useCallback() is a React Hook that returns a memoized version of a function.
+-It helps prevent unnecessary re-creation of functions during component re-renders.
+-It is used when passing functions as props to child components.
+-It preserves the same function reference between parent renders unless its dependencies change.
+
+-Without useCallback(), a new function object is created every time the parent component renders.
+-When this function is passed as a prop to a child component, the child may re-render because the prop reference has changed
+-This can cause child components to re-render unnecessarily(even if the child is using React.memo())
+
+Example of useCallback() - consider components Counter.tsx(parent) and UserCard.tsx(child):
+React.memo — Notes (Parent-Child Props Behavior)
+
+Default behavior (without memo):
+By default, whenever the parent (Counter.tsx) re-renders, the child (UserCard.tsx) also re-renders — even if the props passed to it (name, age, address) did not change.
+
+Case 1: Parent passes only data 
+Right now, Counter.tsx is passing only plain data (name, age, address) to UserCard.tsx, and UserCard is wrapped in React.memo(). Because of this, when I click Increment / Decrement / Reset in the parent, UserCard does not re-render unnecessarily — since those actions only change count, and count doesn't affect UserCard's props at all. This is exactly why we use React.memo() — to skip re-rendering the child when its own props haven't changed.
+
+Case 2: Parent passes a function
+If the parent later passes a function as a prop to UserCard (instead of just plain data), then Increment / Decrement / Reset will start re-rendering UserCard again — even with React.memo() applied. This happens because a new function is created every time the parent re-renders, and React.memo() sees that new function reference as a "changed prop" — so it re-renders the child anyway.
+
+One-line takeaway:
+React.memo() works fine when props are plain data. But if a prop is a function, a new function is created on every parent render — so React.memo() gets tricked into thinking props changed, and re-renders anyway.
+
+Now our requirement is When a function is passed as a prop from parent to child, the child should not re-render for parent state changes if its other props stay the same. To achieve this, wrap that function in useCallback() in the parent. useCallback() keeps the same function reference across parent re-renders, so React.memo on the child can skip unnecessary re-renders.

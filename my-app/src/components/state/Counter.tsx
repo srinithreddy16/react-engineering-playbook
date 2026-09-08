@@ -1,8 +1,25 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import UserCard from "../props/UserCard.tsx";
 
 export default function Counter() {
   const [count, setCount] = useState(0);
+
+  /*
+  // Without useCallback:
+  // A new add function is created on every Counter re-render.
+  // Even with React.memo on UserCard, the child still re-renders
+  // because the add prop reference changes on increment/decrement/reset.
+  const add = (a:number, b:number) =>{
+    console.log(`Addition of ${a} and ${b} is ${a+b}`)
+  }
+  */
+
+  // With useCallback:
+  // The same add function reference is reused until deps change.
+  // React.memo on UserCard can skip re-render when name, age, address stay the same.
+  const add = useCallback((a: number, b: number) => {
+    console.log(`Addition of ${a} and ${b} is ${a+b}`);
+  }, []);
 
   return <>
     <div className="border border-3 rounded-3 m-3 p-3 text-center">
@@ -21,7 +38,7 @@ export default function Counter() {
         console.log('count: ', count);
       }}>Increment</button>
 
-      <UserCard name="Srinit Reddy" age={23} address='USA' />
+      <UserCard name="Srinit Reddy" age={23} address='USA' add={add} />
     </div>
 
   </>
