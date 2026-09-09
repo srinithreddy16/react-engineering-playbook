@@ -28,6 +28,11 @@ import UseMemoTest from "../hooks/UseMemoTest.tsx";
 import ClickCounter from "../HOC/ClickCounter.tsx";
 import HoverCounter from "../HOC/HoverCounter.tsx";
 import MyCounter from "../HOC/MyCounter.tsx";
+import { Routes, Route } from "react-router-dom";
+import Home from "../routing/Home.tsx";
+import AboutUs from "../routing/AboutUs.tsx";
+import Products from "../routing/Products.tsx";
+import NotFound from "../routing/NotFound.tsx";
 
 function Body(){
   console.log(add(10,20));
@@ -68,9 +73,18 @@ function Body(){
     <HoverCounter/>
     <MyCounter/>
     
+    <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/products" element={<Products />} />
+        {/* No Match Route */}
+        <Route path="*" element={<NotFound />} />
+    </Routes>
+    
+    
     
    
   </div>
 }
 export default Body;
-

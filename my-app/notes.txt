@@ -716,3 +716,71 @@ Advantages:
 HOC(Original)  →  Enhanced
 CounterComponent(ClickCounter)  →  ClickCounter with count/increment
 CounterComponent(HoverCounter)  →  HoverCounter with count/increment
+
+
+
+Routing
+=======
+-Single Page Applications (SPAs) load a single HTML page and dynamically update content without reloading the entire page.
+-Only the required portion of the page is updated, resulting in a faster and smoother user experience.
+-Routing enables navigation between different views or components within an SPA.
+-When a user clicks a link or the URL changes, React Router renders the appropriate component without refreshing the page.
+-Routing keeps the browser URL synchronized with the application's current view.
+-Browser Back and Forward buttons work seamlessly, just like in traditional websites.
+-It connects application navigation with browser navigation features such as the address bar, history stack, and navigation buttons.
+-React Router allows us to display specific components based on the current URL (route) that matches the requested path.
+
+-Below are the 3 components used the most while working with React Router are:
+	1. BrowserRouter, usually aliased as Router (wraps all your Route components)
+	2. Link		(used to generate links to your routes)
+	3. Route    (showing or hiding the components they contain)
+
+
+
+Steps for Routing
+=================
+1. Install  React Router DOM
+   npm install react-router-dom   
+2. Create Pages/Components
+   create components like - (Home,About,Contact,Careers,NotFound)   
+3. set up the application to work with React Router. (index.js / main.tsx)
+   import { BrowserRouter } from 'react-router-dom';	
+   <BrowserRouter>
+        <App />
+   </BrowserRouter>	
+4. add the <Routes> element (ensures that only one component is rendered at a time)
+   and add <Route> to create the link between components    (Body.js)
+    <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/home" element={<Home />} />
+        <Route exact path="/aboutus" element={<AboutUs />} />
+        <Route exact path="/products" element={<Products />} />
+        <Route path="*" element={<NotFound />} /> (No Match Route)
+    </Routes>	
+5. Add a Link for each component and use to="URL" to link them.
+		<ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <Link className="nav-link" to="/home">Home</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/aboutus">AboutUs</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/careers">Careers</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/contactus">Contact Us</Link>
+            </li>
+         </ul>
+
+Link vs NavLink
+===============
+<Link> does not automatically apply any styling to the currently active route.
+<NavLink> is similar to <Link>, but it automatically adds an 'active' class to the link that matches the current URL.
+-This makes it easy to highlight the currently selected navigation item.
+ex: <NavLink to='home' className='nav-link'>Home</NavLink>
+
+-add below css: 
+	nav .active{background-color: aquamarine;}
+	
+
