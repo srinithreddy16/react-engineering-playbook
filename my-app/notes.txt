@@ -784,3 +784,33 @@ ex: <NavLink to='home' className='nav-link'>Home</NavLink>
 	nav .active{background-color: aquamarine;}
 	
 
+
+Navigate from one Route to another Route
+=========================================
+-Using <a> tag is not recommended because it refreshes the entire application.
+	<a href="/home">Go To Home</a>
+
+-Using <Link> is recommended because it navigates without reloading the page.
+	<Link to="/home">Go To Home</Link>
+
+			
+			
+Navigating Programatically
+========================== 
+1. Import useNavigate hook
+   import { useNavigate } from 'react-router-dom';
+   
+2. Create navigate object
+   const navigate = useNavigate();
+   
+3. on user action call a function, that function should call navigate()
+   const doSomethingAndGoToHome=()=>{
+    console.log('Execute Some Logic....');
+    navigate('/home')
+  }
+
+Navigate to previous/next route
+===============================
+const navigate = useNavigate();
+<button onClick={()=>navigate(-1)}>Go Back</button>
+<button onClick={()=>navigate(1)}>Go Next</button>
