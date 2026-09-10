@@ -832,5 +832,39 @@ Path Params
 3. Read the Parameter data and display
    const { id } = useParams();
    <h1>This is the details of product - {id}</h1>
+
+
+Query params
+------------
+1. configure the route
+   <Route path="/productdetails" element={<ProductDetails />} />
+   
+2. create a link & navigation logic (ProductList page)
+  const navigate = useNavigate();
+  const navigateHandler = (title, price) => {
+    navigate({
+      pathname: "/productdetails",
+      search: `?${createSearchParams({ title, price })}`,
+    });
+  };
+   <button className="btn btn-secondary" onClick={() => {
+              navigateHandler(title, price);
+            }}>details</button>
+
+3. collect params data and display
+    const [searchParams] = useSearchParams();
+    const id = searchParams.get("id");
+    const title = searchParams.get("title");
+    const price = searchParams.get("price");
+    return <>
+            <h2>Product Details</h2>
+            <p>Id : {id}</p>
+            <p>Title : {title}</p>
+            <p>Price : {price}</p>
+        </>
+	
+  
+Note: To get all the query params as object, below code can be used
+      productObj = Object.fromEntries([...searchParams]);
    
    

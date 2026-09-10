@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import Modal from 'react-modal';
 import Select from "react-select";
 import './ProductList.css';
+import { useNavigate, createSearchParams } from "react-router-dom";
 
 
 
@@ -28,6 +29,21 @@ export default function ProductList() {
     const filteredProducts = selectedProduct
     ? productArr.filter(product => product.id === selectedProduct.value)
     : productArr;
+
+    //query param
+    const navigate = useNavigate();
+
+    const navigateHandler = (id: number, title: string, category: string, price: number) => {
+      navigate({
+        pathname: "/productdetails",
+        search: `?${createSearchParams({
+          id: String(id),
+          title,
+          category,
+          price: String(price),
+        })}`,
+      });
+    }
   return (
     <>
       <h3 className="text-center">Product List</h3>
@@ -76,7 +92,14 @@ export default function ProductList() {
                 <p className="text-truncate">{product.description}</p>
                 <p className="text-truncate">₹ {product.price}</p>
                 <p className="text-truncate">Rating : {product.rating.rate}</p>
-                <button className="btn btn-primary">details</button>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => {
+                    navigateHandler(product.id,product.title,product.category,product.price);
+                  }}
+                >
+                  details
+                </button>
                 </div>
                 </div>
               </div>
