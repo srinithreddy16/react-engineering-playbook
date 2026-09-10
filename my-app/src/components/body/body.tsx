@@ -1,5 +1,6 @@
 import add , {sub, mul} from "../../utils/math.utils"
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 import DataBinding from "../databinding/DataBinding.tsx";
 import DataBindingAssignments from "../databinding_examples/DataBindingExamples.tsx";
 import ListDemo1 from "../listItem/ListDemo1.tsx";
@@ -28,11 +29,12 @@ import UseMemoTest from "../hooks/UseMemoTest.tsx";
 import ClickCounter from "../HOC/ClickCounter.tsx";
 import HoverCounter from "../HOC/HoverCounter.tsx";
 import MyCounter from "../HOC/MyCounter.tsx";
-import { Routes, Route } from "react-router-dom";
 import Home from "../routing/Home.tsx";
 import AboutUs from "../routing/AboutUs.tsx";
-import Products from "../routing/Products.tsx";
+import Careers from "../routing/Careers.tsx";
+import ContactUs from "../routing/ContactUs.tsx";
 import NotFound from "../routing/NotFound.tsx";
+import UserDetail from "../routing/UserDetail.tsx";
 
 function Body(){
   console.log(add(10,20));
@@ -47,8 +49,6 @@ function Body(){
     <DataBinding/>
     <DataBindingAssignments/>
     <ListDemo1/>
-    <UserList/>
-    <ProductList/>
     <ProductList2/>
     <EmployeeList/>
     <TaskList/>
@@ -72,19 +72,19 @@ function Body(){
     <ClickCounter/>
     <HoverCounter/>
     <MyCounter/>
-    
+
     <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="/products" element={<Products />} />
+        <Route path="/careers" element={<Careers />} />
+        <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/products" element={<ProductList />} />
+        <Route path="/users" element={<UserList />} />
+        <Route path="/userdetails/:id" element={<UserDetail />} />
         {/* No Match Route */}
         <Route path="*" element={<NotFound />} />
     </Routes>
-    
-    
-    
-   
   </div>
 }
 export default Body;

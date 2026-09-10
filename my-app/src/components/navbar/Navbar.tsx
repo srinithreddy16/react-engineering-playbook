@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import './navbar.css'
+import './Navbar.css'
 function Navbar(){
   return <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
   <div className="container-fluid">
@@ -20,6 +20,12 @@ function Navbar(){
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/contactus">Contact Us</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/products">Products</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/users">Users</NavLink>
             </li>
          </ul>
       <form className="d-flex" role="search">
