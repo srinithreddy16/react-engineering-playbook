@@ -866,5 +866,21 @@ Query params
   
 Note: To get all the query params as object, below code can be used
       productObj = Object.fromEntries([...searchParams]);
+
+
+Nested Routing
+==============
+-nested routing is used so that a parent component has control over its child component at the route level.
+-Route: Careers (nested Routes: PermanentJobs, ContractJobs)
+		<Route path="/careers" element={<Careers />}>
+            <Route path="/careers/permanent" element={<PermanentJobs />} />
+            <Route path="/careers/contract" element={<ContractJobs />} />
+        </Route>
+-add a nav in Parent(Careers) component, and a outlet	
+     <div>
+        <Link to="permanent" className="mx-2">Permanent Jobs</Link>
+        <Link to="contract">Contract Jobs</Link>
+      </div>
+      <Outlet />
    
    

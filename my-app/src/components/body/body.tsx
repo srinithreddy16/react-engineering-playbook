@@ -36,6 +36,8 @@ import ContactUs from "../routing/ContactUs.tsx";
 import NotFound from "../routing/NotFound.tsx";
 import UserDetail from "../routing/UserDetail.tsx";
 import ProductDetails from "../routing/ProductDetails.tsx";
+import PermanentJobs from "../routing/PermanentJobs.tsx";
+import ContractJobs from "../routing/ContractJobs.tsx";
 
 function Body(){
   console.log(add(10,20));
@@ -78,7 +80,10 @@ function Body(){
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="/careers" element={<Careers />} />
+        <Route path="/careers" element={<Careers />}>
+          <Route path="permanent" element={<PermanentJobs />} />
+          <Route path="contract" element={<ContractJobs />} />
+        </Route>
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/products" element={<ProductList />} />
         <Route path="/productdetails" element={<ProductDetails />} />
