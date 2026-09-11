@@ -81,6 +81,7 @@ function Body(){
         <Route path="/home" element={<Home />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/careers" element={<Careers />}>
+          <Route index element={<PermanentJobs />} />
           <Route path="permanent" element={<PermanentJobs />} />
           <Route path="contract" element={<ContractJobs />} />
         </Route>

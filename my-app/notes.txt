@@ -883,4 +883,15 @@ Nested Routing
       </div>
       <Outlet />
    
+
+
+	  
+Index Route: We use index route When parent component loads along with parent component one of the child component by default should load
+===========
+-an index route is a special child route that renders by default when parent route loads/matches.
+<Route path="/careers" element={<Careers />}>
+    <Route index element={<PermanentJobs />} />
+    <Route path="/careers/permanent" element={<PermanentJobs />} />
+    <Route path="/careers/contract" element={<ContractJobs />} />
+</Route>
    
