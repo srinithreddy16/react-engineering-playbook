@@ -960,3 +960,40 @@ Suspense
 <Suspense fallback={<div>Loading...</div>}>
     <OtherComponent />
 </Suspense>
+
+ESLint
+======
+-ESLint is a static code analysis tool for identifying problematic code present in JavaScript/Typescript code.
+-It Examines and list down the errors , bad practices, style issues present in our project.
+
+
+1. npm i eslint -g
+2. npm init @eslint/config@latest --force
+         (OR) 
+   npx eslint --init
+	
+3. eslint . --config eslint.config.mjs
+   npm run lint (If you already have eslint in your project )
+
+// eslint.config.mjs from step-2
+import js from '@eslint/js';
+import globals from 'globals';
+export default [
+  {
+    files: ['**/*.js', '**/*.jsx'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        ...globals.browser,
+        ...globals.node
+      }
+    },
+    plugins: {},
+    rules: {
+      'no-unused-vars': 'warn',
+      'no-console': 'error',
+      'no-debugger': 'error'
+    }
+  },
+];
