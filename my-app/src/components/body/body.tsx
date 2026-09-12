@@ -38,6 +38,8 @@ import UserDetail from "../routing/UserDetail.tsx";
 import ProductDetails from "../routing/ProductDetails.tsx";
 import PermanentJobs from "../routing/PermanentJobs.tsx";
 import ContractJobs from "../routing/ContractJobs.tsx";
+import UploadVideos from "../routing/UploadVideos.tsx";
+import ProtectedRoute from "../routing/ProtectedRoute.tsx";
 
 function Body(){
   console.log(add(10,20));
@@ -90,6 +92,14 @@ function Body(){
         <Route path="/productdetails" element={<ProductDetails />} />
         <Route path="/users" element={<UserList />} />
         <Route path="/userdetails/:id" element={<UserDetail />} />
+        <Route
+          path="/upload"
+          element={
+            <ProtectedRoute>
+              <UploadVideos />
+            </ProtectedRoute>
+          }
+        />
         {/* No Match Route */}
         <Route path="*" element={<NotFound />} />
     </Routes>

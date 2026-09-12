@@ -895,3 +895,12 @@ Index Route: We use index route When parent component loads along with parent co
     <Route path="/careers/contract" element={<ContractJobs />} />
 </Route>
    
+
+Protected Routes
+================
+-Protected Routes are routes that can only be accessed if a condition is met(usually, if user is properly authenticated). 
+-It returns a Route that either renders a component or redirects a user to another route based on a set condition.
+
+-create a component that accepts another component and other route details as props.
+-check a condition to confirm if user is authenticated or not. 
+-if the value is true, render the component, else, Redirect route to /signin page.
