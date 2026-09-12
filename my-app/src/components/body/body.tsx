@@ -1,11 +1,10 @@
 import add , {sub, mul} from "../../utils/math.utils"
-import React from "react";
+import React, { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import DataBinding from "../databinding/DataBinding.tsx";
 import DataBindingAssignments from "../databinding_examples/DataBindingExamples.tsx";
 import ListDemo1 from "../listItem/ListDemo1.tsx";
 import UserList from "../userlist/UserList.tsx";
-import ProductList from "../productList/ProductList.tsx";
 import EmployeeList from "../listItem/EmployeeList.tsx";
 import TaskList from "../listItem/TaskList.tsx";
 import PropsDemo1 from "../props/PropsDemo1.tsx";
@@ -40,6 +39,8 @@ import PermanentJobs from "../routing/PermanentJobs.tsx";
 import ContractJobs from "../routing/ContractJobs.tsx";
 import UploadVideos from "../routing/UploadVideos.tsx";
 import ProtectedRoute from "../routing/ProtectedRoute.tsx";
+
+const ProductList = React.lazy(() => import("../productList/ProductList.tsx"));
 
 function Body(){
   console.log(add(10,20));
@@ -88,7 +89,14 @@ function Body(){
           <Route path="contract" element={<ContractJobs />} />
         </Route>
         <Route path="/contactus" element={<ContactUs />} />
-        <Route path="/products" element={<ProductList />} />
+        <Route
+          path="/products"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <ProductList />
+            </Suspense>
+          }
+        />
         <Route path="/productdetails" element={<ProductDetails />} />
         <Route path="/users" element={<UserList />} />
         <Route path="/userdetails/:id" element={<UserDetail />} />

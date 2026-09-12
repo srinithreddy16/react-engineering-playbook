@@ -940,3 +940,23 @@ Same steps → redirected to /home
 Browser Back would go to /upload again
 The guard would redirect you to /home again — so Back feels stuck looping between /upload and /home
 Short version: replace removes the blocked /upload visit from history so Back skips it and returns to the previous allowed page.
+
+Code Splitting/Lazy Loading
+===========================
+-Eager Loading: Components are loaded when the application starts.
+-Lazy Loading: Components are loaded only when they are required.
+
+-Faster initial page load, Loads components only when needed
+-React.lazy() is used to load a component dynamically.
+
+  Eager Import: import OtherComponent from './OtherComponent';
+  Lazy Import : const OtherComponent = React.lazy(() => import('./OtherComponent'));
+
+Suspense
+--------
+-A lazy-loaded component must be wrapped inside Suspense.
+-Suspense displays fallback content while the component is being loaded.
+
+<Suspense fallback={<div>Loading...</div>}>
+    <OtherComponent />
+</Suspense>
