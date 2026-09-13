@@ -7,12 +7,15 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { BrowserRouter } from 'react-router-dom';
 import { userContext } from './utils/app_context.ts';
 import { loggedInUser } from './services/user_information_service.ts';
+import { TimeProvider } from './utils/TimeContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <userContext.Provider value={loggedInUser}>
-	      <App />
+        <TimeProvider>
+          <App />
+        </TimeProvider>
 	    </userContext.Provider>
     </BrowserRouter>
   </StrictMode>,
