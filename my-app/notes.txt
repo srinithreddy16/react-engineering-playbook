@@ -1064,4 +1064,40 @@ it() (OR) test()
 expect() 
 -The expect() compares actual value with the expected value.
 -ex: expect(add(2,3)).toBe(5);
-    actual=method's return value   expeted=5 
+    actual=method's return value   expeted=5
+
+Props Drilling
+==============
+-Props drilling means passing props through multiple intermediate components to reach deeply nested child components.
+-It can make component structures difficult to maintain.
+-Context API/REDUX is commonly used to avoid props drilling. 
+
+
+Context API
+===========
+-React context API helps to avoid the problem of props drilling & share global state easily.
+-Context provides a way to pass data through the component tree without passing props through intermediate components.
+-Context is primarily used when some data needs to be accessible by many components at different nesting levels.
+-useful and ideal for small applications where state changes are minimal.
+-ex: current authenticated user, theme, or preferred language.
+
+-There are 3 main steps to use the React context:
+1. Create context using the React.createContext({}) method.
+	export const MyContext = React.createContext(defaultValue);
+	
+2. Create a Provider that supplies the data to components
+	<MyContext.Provider value={/* some value */}>
+	    <ComponentX />
+	<MyContext.Provider>
+	   
+3. Consume the context value. 
+	const myContextObj = useContext(myContext);
+	<div>Context Data is: {myContextObj}</div>
+			
+	   
+		
+Read Context data in Class Component
+---------------------------------------
+<MyContext.Consumer>
+	{value => /* render something based on the context value */}
+</MyContext.Consumer>
