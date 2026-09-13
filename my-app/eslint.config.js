@@ -25,7 +25,7 @@ export default defineConfig([
         'error',
         {
           allowConstantExport: true,
-          allowExportNames: ['useTime'],
+          allowExportNames: ['useTime', 'useTheme'],
           extraHOCs: ['CounterComponent', 'withLogger'],
         },
       ],
