@@ -1,5 +1,8 @@
+import CounterDemo from "../counter/CounterDemo.tsx";
+
 export default function Home() {
-  return (
-    <div>Home</div>
-  )
+  return <>
+    <h2>This is Home Component</h2>
+    <CounterDemo/>
+  </>
 }

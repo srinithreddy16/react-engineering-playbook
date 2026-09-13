@@ -7,8 +7,8 @@ export function sub(a: number, b: number) {
 export function mul(a: number, b: number) {
   return a * b;
 }
-export function isEven(n: number) {
-  return n % 2 === 0;
+export function isEven(num: number) {
+  return num % 2 == 0;
 }
 export function sumOfDigits(n: number) {
   return String(Math.abs(n))
