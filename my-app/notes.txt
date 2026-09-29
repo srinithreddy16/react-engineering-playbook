@@ -1101,3 +1101,94 @@ Read Context data in Class Component
 <MyContext.Consumer>
 	{value => /* render something based on the context value */}
 </MyContext.Consumer>
+
+Redux
+=====
+-Redux is a state management library.
+-Redux stores the state of our application.
+-With Redux the state is maintained outside the React component,not in a particular component.
+-Redux 1.0 August 2015
+-React-Redux is the library that provides binding to use React and Redux together in an application.
+-In a typical Redux app there will be a single store & Root-reducer.
+-As Your app grows, you split the Root Reducer in to smaller reducers 
+ independently operating on the different parts of the state tree.
+
+
+View/UI-----> Action --> Reducer --> Store/State --> View
+
+
+3 Core Concepts in Redux
+========================
+1. Store : Holds the state(data) of our application. (shop)
+2. Action : Describes the changes in the state of the application. 
+			(what happened)(purchase a TV)
+3. Reducer : Ties the store and actions together. (shopKeeper)
+
+
+
+3 Principles
+===========
+1. The state of our whole application is stored in an object tree within a single store.
+   Maintain your whole application state in a single object which would be managed by the Redux store.
+    
+2. The only way to change the state is to emit action, an object describing what happened.
+   To update the state of your app , you need to let Redux know about that with an action.
+   Not allowed to directly update the state object.
+
+3. To specify how the state tree is transformed by actions. You write pure Reducers.
+   These ensures that neither the views nor the network callbacks will ever write directly to the state
+   Reducer - (previous state, action)=>newState
+ 
+
+Store
+======
+-One store for the entire application.
+-Holds applications state.
+-Allows access to state via getState()
+-Allows state to be updated via dispatch(action)
+-Register Listeners via subscribe(listner)
+-Handles unregistering of listners via the function returned by subscribe(listner).
+
+
+Actions
+=======
+-The only way your application can interact with the store.
+-carry some information from your React application to the Redux store.
+-plain javascript objects.
+-Have a 'type'  property that indicates the type of action being performed.
+-The type of property is typically defined as a string constants.
+
+
+Reducers
+=========
+-Specify how the application state changes in response to actions sent to the store.
+-Function that accepts state and actions as arguement, and returns the next state of the application.
+-reducer1(previous state, action)=>newState
+-Instead of mutating the state directly,we specify the mutations you want to 
+ happen with plain objects called actions.
+-Then we write a special function called a Reducer to decide how every action transforms the entire applications state.
+
+
+Context API: useful and ideal for small applications where state changes are minimal.
+Redux: Perfect for larger applications where there are high-frequency state updates.Redux gives a more structural and advanced way of doing state management.
+
+
+Redux Toolkit
+=============
+1.Create a new project 
+   npx create-react-app employee-mgmt --template redux
+2.Install Redux Toolkit and React Redux (for existing react app)
+   npm install @reduxjs/toolkit react-redux
+3.Create a Redux store with configureStore
+	configureStore() accepts a reducer function as a named argument
+	configureStore() automatically sets up the store with good default settings
+4.Provide the Redux store to the React application components
+	Put a React-Redux <Provider> component around your <App />
+	Pass the Redux store as <Provider store={store}>
+5.Create a Redux "slice" reducer with createSlice
+	Call createSlice with a string name, an initial state, and named reducer functions
+	Reducer functions may "mutate" the state using Immer
+	Export the generated slice reducer and action creators
+6.Use the React-Redux useSelector/useDispatch hooks in React components
+	Read data from the store with the useSelector hook
+	Get the dispatch function with the useDispatch hook, and dispatch actions as needed

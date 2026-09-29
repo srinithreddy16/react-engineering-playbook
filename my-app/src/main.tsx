@@ -9,6 +9,8 @@ import { userContext } from './utils/app_context.ts';
 import { loggedInUser } from './services/user_information_service.ts';
 import { TimeProvider } from './utils/TimeContext.tsx';
 import { ThemeProvider } from './utils/ThemeContext.tsx';
+import { Provider } from "react-redux";
+import { myStore } from "./store/store.ts";
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -16,7 +18,9 @@ createRoot(document.getElementById('root')!).render(
       <userContext.Provider value={loggedInUser}>
         <TimeProvider>
           <ThemeProvider>
-            <App />
+            <Provider store={myStore}>
+              <App />
+            </Provider>
           </ThemeProvider>  
         </TimeProvider>
 	    </userContext.Provider>
