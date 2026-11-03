@@ -1192,3 +1192,95 @@ Redux Toolkit
 6.Use the React-Redux useSelector/useDispatch hooks in React components
 	Read data from the store with the useSelector hook
 	Get the dispatch function with the useDispatch hook, and dispatch actions as needed
+
+
+useReducer
+----------
+-useReducer is a hook,convenient for dealing with more complex state changes in React components.
+-useReducer borrows some theory from Redux,the concepts of reducers, action, and dispatch.
+-useReducer Hook accepts two arguments. 
+ useReducer(<reducer>, <initialState>)
+-The useReducer Hook returns the current state and a dispatch method.
+ const [todos, dispatch] = useReducer(reducer, initialTodos);
+
+==========================
+
+What is useReducer? (simple)
+
+useReducer is a hook that also stores state, just like useState. The difference is how you change it.
+
+useState: you directly say “set the value to this.”
+useReducer: you say “this happened” (an action), and a separate function (the reducer) decides what the new value should be.
+
+Real-life analogy:
+
+useState = you walk into the kitchen and cook the food yourself.
+useReducer = you give your order to a waiter (“one pizza”), and the kitchen (reducer) decides how to make it.
+Side by side: same counter, both ways
+
+With useState
+
+tsx
+const [count, setCount] = useState(0);
+
+<button onClick={() => setCount(count + 1)}>+</button>
+<button onClick={() => setCount(count - 1)}>-</button>
+<button onClick={() => setCount(0)}>Reset</button>
+
+The update logic (count + 1, count - 1, 0) is written inside the buttons.
+
+With useReducer
+
+tsx
+function reducer(state: number, action: { type: string }) {
+  switch (action.type) {
+    case "increment": return state + 1;
+    case "decrement": return state - 1;
+    case "reset":     return 0;
+    default:          return state;
+  }
+}
+
+const [count, dispatch] = useReducer(reducer, 0);
+
+<button onClick={() => dispatch({ type: "increment" })}>+</button>
+<button onClick={() => dispatch({ type: "decrement" })}>-</button>
+<button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+
+The update logic lives in one place (the reducer). Buttons only say what happened.
+
+Is useReducer simpler than useState?
+
+Honestly, no, not for simple cases. useState is shorter and easier. useReducer becomes simpler only when your state gets complicated, because it keeps all the update rules organized in one place instead of scattered everywhere.
+
+When to use which
+
+Use useState when:
+
+State is a single simple value (toggle, input text, counter)
+There are only 1 or 2 ways to change it
+
+Use useReducer when:
+
+State is an object with several related fields (e.g. form: name, email, errors, isSubmitting)
+There are many different ways to update the same state (add, remove, edit, clear)
+The new state depends on the old state in complicated ways
+Your event handlers are getting messy and you want the logic in one place
+
+Example where useState becomes messy:
+
+tsx
+// Cart with many operations → lots of scattered setCart(...) calls
+setCart([...cart, item]);                          // in addToCart
+setCart(cart.filter(i => i.id !== id));            // in removeFromCart
+setCart(cart.map(i => i.id === id ? {...i, qty} : i)); // in updateQty
+setCart([]);                                       // in clearCart
+
+Same thing with useReducer: all four rules sit together in one reducer, and components just call dispatch({ type: "add", payload: item }), dispatch({ type: "clear" }), etc.
+
+Why are they always compared?
+
+Because they do the same job: both store state in a component and re-render it when the state changes. They are two ways to solve the same problem, so developers naturally ask “which one should I pick?”
+
+In fact, useState is built on the same idea internally: it is like a useReducer with a very simple built-in reducer (“replace the old value with the new one”).
+ 

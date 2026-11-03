@@ -11,6 +11,7 @@
       "@vitest/browser/matchers"
     ],
     "allowArbitraryExtensions": true,
+    "allowJs": true,
     "skipLibCheck": true,
 
     /* Bundler mode */
