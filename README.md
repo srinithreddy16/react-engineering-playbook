@@ -1,6 +1,6 @@
 # React Engineering Playbook
 
-A hands-on React + TypeScript learning project built with **Vite**. This repository walks through core React concepts with working demos—from Virtual DOM basics to routing, HTTP, Context API, lazy loading, ESLint, and unit testing with Vitest.
+A hands-on React + TypeScript learning project built with **Vite**. This repository walks through core React concepts with working demos—from Virtual DOM basics to routing, HTTP, Context API, lazy loading, ESLint, unit testing with Vitest, `useReducer`, and state management with **Redux Toolkit**.
 
 > Application code lives in the [`my-app`](./my-app) folder.
 
@@ -32,6 +32,9 @@ A hands-on React + TypeScript learning project built with **Vite**. This reposit
    - [Context API](#17-context-api)
    - [ESLint](#18-eslint)
    - [Unit Testing (Vitest)](#19-unit-testing-vitest)
+   - [`useReducer`](#20-usereducer)
+   - [Redux (Redux Toolkit)](#21-redux-redux-toolkit)
+   - [Context API vs `useReducer` vs Redux](#22-context-api-vs-usereducer-vs-redux)
 6. [Key Routes](#key-routes)
 7. [Useful Scripts](#useful-scripts)
 8. [Learning Notes](#learning-notes)
@@ -47,6 +50,7 @@ A hands-on React + TypeScript learning project built with **Vite**. This reposit
 | Routing | `react-router-dom` |
 | HTTP | Axios |
 | Forms | Formik + Yup |
+| State management | Context API, `useReducer`, Redux Toolkit (`@reduxjs/toolkit`) + `react-redux` |
 | UI helpers | SweetAlert2, react-modal, react-select, react-icons |
 | Testing | Vitest, Testing Library, jest-dom, jsdom |
 | Lint | ESLint + typescript-eslint + react-hooks |
@@ -73,8 +77,13 @@ ReactProject/                 ← GitHub repository root
 ├── package-lock.json
 └── my-app/                   ← Vite React application
     ├── src/
-    │   ├── main.tsx          ← App bootstrap (Router + providers)
+    │   ├── main.tsx          ← App bootstrap (Router + Context providers + Redux Provider)
     │   ├── App.tsx           ← Layout shell + interceptors
+    │   ├── store/
+    │   │   └── store.ts      ← Redux store (configureStore)
+    │   ├── features/
+    │   │   └── todo/
+    │   │       └── todoSlice.js   ← Redux slice for the to-do list
     │   ├── components/
     │   │   ├── navbar/       ← NavLink navigation
     │   │   ├── categories/   ← Props parent → child demo
@@ -86,13 +95,14 @@ ReactProject/                 ← GitHub repository root
     │   │   ├── props/
     │   │   ├── state/
     │   │   ├── form/
-    │   │   ├── hooks/
+    │   │   ├── hooks/        ← useEffect, useMemo demos + TaskList.jsx (useReducer)
     │   │   ├── HOC/
     │   │   ├── http/
     │   │   ├── productList/
     │   │   ├── userlist/
     │   │   ├── folder_explorer/
-    │   │   ├── counter/      ← CounterDemo (tested)
+    │   │   ├── counter/      ← CounterDemo (tested), counterSlice.ts, CounterWithRedux.tsx
+    │   │   ├── redux/        ← ToDoList, ToDo, AddToDo (Redux to-do app)
     │   │   └── routing/      ← Pages, nested & protected routes
     │   ├── interceptors/     ← Auth, Time, Error
     │   ├── services/
@@ -117,6 +127,7 @@ ReactProject/                 ← GitHub repository root
 - `userContext.Provider` (logged-in user string)
 - `TimeProvider` (live clock)
 - `ThemeProvider` (light/dark theme)
+- `Provider store={myStore}` (Redux store from `react-redux`)
 
 **`App.tsx`** renders the page layout:
 
@@ -232,9 +243,11 @@ Covered ideas: controlled vs uncontrolled inputs, validation messages, form stat
 | `useMemo` | Cache expensive calculated values |
 | `useCallback` | Cache function identities for memoized children |
 | `useContext` | Read Context values |
+| `useReducer` | Complex local state through actions + a reducer function |
+| `useSelector` / `useDispatch` | Read from and update the Redux store (`react-redux`) |
 | Custom hooks | `useTime()`, `useTheme()` |
 
-**Examples:** `UseEffectDemo1.tsx`, `UserDetails.tsx`, `UseMemoTest.tsx`
+**Examples:** `UseEffectDemo1.tsx`, `UserDetails.tsx`, `UseMemoTest.tsx`, `hooks/TaskList.jsx`
 
 Lifecycle mapping (notes): class lifecycle phases ↔ `useEffect` patterns (`[]`, `[deps]`, cleanup).
 
@@ -350,7 +363,7 @@ How to verify: Network tab → open Products → JS chunk appears only then.
 
 ### 17. Context API
 
-Avoid prop drilling by providing shared values at the top of the tree.
+**Props drilling** means passing props through several intermediate components only so a deeply nested child can use them. It makes components harder to maintain. Context API (and Redux) avoid it by providing shared values at the top of the tree.
 
 | Context | File | What it shares |
 |---------|------|----------------|
@@ -363,9 +376,13 @@ Avoid prop drilling by providing shared values at the top of the tree.
 1. `createContext`
 2. Provider with state (`TimeProvider` / `ThemeProvider`)
 3. Custom hook (`useTime` / `useTheme`) using `useContext`
-4. Consumers: `CounterDemo`, `Footer`, etc.
+4. Consumers: `CounterDemo` (user, time, theme), `Footer` (time)
 
 `TimeProvider` uses `useEffect` + `setInterval` (1s) and cleans up with `clearInterval`.
+
+`ThemeProvider` keeps `theme` in state and memoizes `{ theme, toggleTheme }` with `useMemo`. `CounterDemo` shows the current theme and a **Toggle Theme** button that calls `toggleTheme`.
+
+Class components can read context with `<MyContext.Consumer>{value => ...}</MyContext.Consumer>` (covered in notes).
 
 ---
 
@@ -408,11 +425,98 @@ npm run test:ui       # Vitest UI
 
 ---
 
+### 20. `useReducer`
+
+`useReducer` stores state like `useState`, but updates go through a **reducer**: components `dispatch` an action that says what happened, and the reducer decides the new state. It borrows the reducer/action/dispatch ideas from Redux, but the state stays local to the component.
+
+```js
+const [taskArr, dispatch] = useReducer(reducer, initialTasks);
+dispatch({ type: "TOGGLE", id: taskId });
+```
+
+**Example:** `components/hooks/TaskList.jsx` is a task list with three actions:
+
+| Action | What the reducer does |
+|--------|-----------------------|
+| `ADD` | Appends a new task (`payload`) |
+| `DELETE` | Removes the task with the matching `id` |
+| `TOGGLE` | Flips `complete` for the matching `id` |
+
+The input value is read with `useRef`, and completed tasks are shown with a strikethrough.
+
+**When to use it:** `useState` is simpler for one value with one or two ways to change it. `useReducer` is better when state has several related update rules, because all the rules live in one function.
+
+---
+
+### 21. Redux (Redux Toolkit)
+
+Redux is a state management library. The state lives **outside** components in a single **store**, and any component can read or update it. `react-redux` connects Redux to React.
+
+**Three core concepts**
+
+| Concept | Role |
+|---------|------|
+| Store | Holds the whole application state |
+| Action | Plain object describing what happened (`{ type, payload }`) |
+| Reducer | Pure function `(previousState, action) => newState` |
+
+**Three principles**
+
+1. The whole state lives in one object tree in a single store.
+2. The only way to change state is to dispatch an action.
+3. Changes are made by pure reducers.
+
+**Data flow:** UI → `dispatch(action)` → reducer → store → UI re-renders.
+
+**Redux Toolkit setup used in this project**
+
+1. Install: `npm install @reduxjs/toolkit react-redux`
+2. Create the store with `configureStore` in `src/store/store.ts`
+3. Wrap `<App />` in `<Provider store={myStore}>` in `main.tsx`
+4. Create slices with `createSlice` (name + initial state + reducers). Redux Toolkit generates the action creators, and Immer lets reducers "mutate" state safely.
+5. In components, read with `useSelector` and update with `useDispatch`
+
+```ts
+export const myStore = configureStore({
+  reducer: {
+    counter: counterReducer,
+    todoReducer: todoReducer,
+  },
+});
+```
+
+**Demo 1: Redux counter**
+
+- `components/counter/counterSlice.ts`: state is a number; reducers `increment`, `decrement`, `reset`
+- `components/counter/CounterWithRedux.tsx`: `useSelector((state) => state.counter)` to read, `dispatch(increment())` etc. to update
+
+**Demo 2: Redux to-do list**
+
+- `features/todo/todoSlice.js`: state `{ todoList: [...] }`; reducers `addToDo`, `deleteToDo`, `toggleToDo`
+- `components/redux/ToDoList.jsx`: reads `state.todoReducer.todoList`, renders each item, and shows "completed / total"
+- `components/redux/AddToDo.jsx`: reads the input with `useRef` and dispatches `addToDo(text)`
+- `components/redux/ToDo.jsx`: dispatches `deleteToDo(id)` and `toggleToDo(id)`; completed items get a strikethrough
+
+The Redux to-do files are plain `.js`/`.jsx`, so `tsconfig.app.json` has `"allowJs": true` to let TypeScript files import them.
+
+---
+
+### 22. Context API vs `useReducer` vs Redux
+
+| | Context API | `useReducer` | Redux Toolkit |
+|--|-------------|--------------|---------------|
+| Built into React | Yes | Yes | No (library) |
+| Scope | Shared across a subtree | Local to one component | Whole app, outside components |
+| Best for | Values that change rarely (user, theme, language) | Complex local state with many update rules | Large apps with frequent, shared state updates |
+| In this project | `userContext`, `TimeContext`, `ThemeContext` | `TaskList.jsx` | Counter slice, to-do slice |
+
+---
+
 ## Key Routes
 
 | Path | Component / behavior |
 |------|----------------------|
-| `/`, `/home` | Home (+ CounterDemo) |
+| `/`, `/home` | Home: CounterDemo (Context), CounterWithRedux, TaskList (`useReducer`), ToDoList (Redux) |
 | `/aboutus` | About Us |
 | `/careers` | Careers + nested jobs (`Outlet`, index → Permanent) |
 | `/careers/permanent` | PermanentJobs |
@@ -445,7 +549,7 @@ npm run test:ui       # Vitest UI
 
 ## Learning Notes
 
-Extended study notes (Virtual DOM, hooks, routing, interceptors, testing terminology, and more) are maintained in:
+Extended study notes (Virtual DOM, hooks, routing, interceptors, testing terminology, props drilling, Context API, Redux, Redux Toolkit, `useReducer`, and more) are maintained in:
 
 [`my-app/notes.txt`](./my-app/notes.txt)
 
